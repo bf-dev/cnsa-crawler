@@ -142,4 +142,4 @@ app.get("/addQueue", (req: Request, res: Response) => {
 	});
 	res.send("큐에 추가되었습니다.");
 });
-app.listen(1677, () => console.log("Server running on port 3000"));
+app.listen(80, () => console.log("Server running on port 80"));

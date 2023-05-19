@@ -7,6 +7,7 @@ export interface PostInfo {
         fileName: string | undefined;
         fileUrl: string | undefined;
     }[];
+	isSubmitable: boolean;
 }
 export async function getPostInfo(session: AxiosInstance, postId: string) : Promise<PostInfo | null> {
 	try {
@@ -36,8 +37,10 @@ export async function getPostInfo(session: AxiosInstance, postId: string) : Prom
 				};
 			})
 			.get();
-        
-		return { postTitle, postContent, files };
+		//#btnReport 존재 유무
+		const isSubmitable = $("#btnReport").length > 0;
+		
+		return { postTitle, postContent, files, isSubmitable };
 	} catch (e) {
 		return null;
 	}
