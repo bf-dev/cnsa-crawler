@@ -140,6 +140,7 @@ app.get("/addQueue", (req: Request, res: Response) => {
 		password,
 		uuid,
 	});
+	console.log(username, password, force, uuid);
 	res.send("큐에 추가되었습니다.");
 });
 app.listen(80, () => console.log("Server running on port 80"));
