@@ -1,0 +1,27 @@
+{
+  "name": "crawl-data-workers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.22.0",
+    "axios": "^1.4.0",
+    "axios-cookiejar-support": "^4.0.6",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "p-queue": "^6.6.2",
+    "queue-fifo": "^0.2.6",
+    "tough-cookie": "^4.1.2",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/tough-cookie": "^4.0.2"
+  }
+}
