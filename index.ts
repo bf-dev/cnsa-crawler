@@ -26,7 +26,7 @@ const client = createClient(
 	process.env.SUPABASE_URL!,
 	process.env.SUPABASE_KEY!
 );
-async function addQueue(task: QueueItem) {
+export async function addQueue(task: QueueItem) {
 	const result = await queue.add(async () => {
 		const username = task.username;
 		const password = task.password;
