@@ -8,7 +8,7 @@ const client = createClient(
 	process.env.SUPABASE_KEY!
 );
 // Define a cron job that runs every 2 hours
-const job = new CronJob("40 * * * *", async () => {
+const job = new CronJob("0 */2 * * *", async () => {
 	console.log("Running cron job...");
 	try {
 		// Fetch data from Supabase
