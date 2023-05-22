@@ -4,6 +4,7 @@ import { load } from "cheerio";
 
 export async function getClass(session: AxiosInstance) {
     const { data } = await session.get("/subject/curriculum/curriculumList");
+    
     if (data.includes("ajaxLoginError")) return null;
     const $ = load(data);
     return $(".tableBasicList tbody tr").map((_a, element) => {

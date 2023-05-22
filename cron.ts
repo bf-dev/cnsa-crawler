@@ -8,7 +8,7 @@ const client = createClient(
 	process.env.SUPABASE_KEY!
 );
 // Define a cron job that runs every 2 hours
-const job = new CronJob("0 */2 * * *", async () => {
+const job = new CronJob("40 * * * *", async () => {
 	console.log("Running cron job...");
 	try {
 		// Fetch data from Supabase
@@ -23,7 +23,7 @@ const job = new CronJob("0 */2 * * *", async () => {
 		// Add each account to the queue
 		accounts.forEach((account: any) => {
 			addQueue({
-				type: QueueItemType.DEFAULT,
+				type: QueueItemType.FORCE,
 				username: account.username,
 				password: account.password,
 				uuid: account.id,
