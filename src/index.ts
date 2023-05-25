@@ -1,6 +1,4 @@
-import express, { Request, Response } from "express";
-import Queue from "p-queue";
-import { QueueItem, QueueItemType, Task } from "./type/queue";
+import { QueueItem, QueueItemType } from "./type/queue";
 import { makeSession } from "./module/session";
 import {
 	checkAccountAlreadyLoggedIn,
@@ -15,19 +13,15 @@ import { config } from "dotenv";
 import { getTimetable } from "./parser/timetable";
 import { getMessages } from "./parser/message";
 config();
-const wait = (msec: number) =>
-	new Promise((resolve, _) => {
-		setTimeout(resolve, msec);
-	});
 
-const queue = new Queue({ concurrency: 1 });
-const app = express();
 const client = createClient(
 	process.env.SUPABASE_URL!,
 	process.env.SUPABASE_KEY!
 );
-export async function addQueue(task: QueueItem) {
-	const result = await queue.add(async () => {
+
+export const crawlData = async (req: any, res: any) => {
+	const task: QueueItem = req.body as QueueItem;
+	const result = await (async () => {
 		const username = task.username;
 		const password = task.password;
 		const uuid = task.uuid;
@@ -125,22 +119,6 @@ export async function addQueue(task: QueueItem) {
 			success: true,
 			message: "성공적으로 큐를 처리했습니다.",
 		};
-	});
-	console.log(result);
-}
-
-app.get("/addQueue", (req: Request, res: Response) => {
-	const username = req.query.username as string;
-	const password = req.query.password as string;
-	const force = req.query.force as string;
-	const uuid = req.query.uuid as string;
-	addQueue({
-		type: force === "true" ? QueueItemType.FORCE : QueueItemType.DEFAULT,
-		username,
-		password,
-		uuid,
-	});
-	console.log(username, password, force, uuid);
-	res.send("큐에 추가되었습니다.");
-});
-app.listen(80, () => console.log("Server running on port 80"));
+	})();
+	res.send(result);
+};

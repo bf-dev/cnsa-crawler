@@ -1,6 +1,6 @@
 export enum QueueItemType {
-    DEFAULT,
-    FORCE
+    DEFAULT = "DEFAULT",
+    FORCE = "FORCE"
 }
 export enum Task {
     LOGIN,
